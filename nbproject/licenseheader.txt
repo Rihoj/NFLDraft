@@ -1,0 +1,8 @@
+/**
+ * Program: ${project.name}
+ * File: ${nameAndExt}
+ * Summary: 
+ * Author: James Ray
+ * Date: ${date?date}
+ */
+

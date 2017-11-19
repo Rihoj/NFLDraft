@@ -1,3 +1,11 @@
+/**
+ * Program: NFLDraft
+ * File: NFLDraft.java
+ * Summary: 
+ * Author: James Ray
+ * Date: Nov 18, 2017
+ */
+
 package nfldraft;
 
 import javafx.application.Application;
