@@ -90,8 +90,11 @@ public class NFLPlayer {
     }
 
     //Removes player from team.
-    public void removeTeam(){
-        team = null;
+    public void leaveTeam(){
+        if(team != null){
+            team = null;
+            team.removePlayer(this);
+        }
     }
 
     //get the position the player has.

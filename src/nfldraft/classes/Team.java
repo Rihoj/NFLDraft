@@ -61,8 +61,11 @@ public class Team {
 
     //remove a signle player from the team.
     public void removePlayer(NFLPlayer player){
-        player.removeTeam();
         players.remove(player);
+    }
+    public void firePlayer(NFLPlayer player) {
+        players.remove(player);
+        player.setTeam(null);
     }
 
     //Get the owner of the team,

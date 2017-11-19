@@ -57,4 +57,9 @@ public class DefensePosition implements PositionInterface {
         return stats;
     }
 
+    //return the position type
+    @Override
+    public String getPositionType() {
+        return "Defense";
+    }
 }

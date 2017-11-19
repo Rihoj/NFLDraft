@@ -14,4 +14,7 @@ public interface PositionInterface {
     //All positions must have statistics and be able to return them as a Map<String, Integer>
     public Map<String, Integer> getStats();
 
+    //returns the position type
+    public String getPositionType();
+
 }

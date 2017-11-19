@@ -58,4 +58,10 @@ public class OffensePosition implements PositionInterface {
         return stats;
     }
 
+    //return the position type
+    @Override
+    public String getPositionType() {
+        return "Offense";
+    }
+
 }
