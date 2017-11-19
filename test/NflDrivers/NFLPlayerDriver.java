@@ -1,7 +1,7 @@
 /**
  * Program: NFLDraft
  * File: NFLPlayerDriver.java
- * Summary:
+ * Summary: Test class for NFL Player
  * Author: James Ray
  * Date: Nov 18, 2017
  */
