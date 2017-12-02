@@ -1,5 +1,6 @@
 build/
 dist/
+nbproject/
 # Compiled class file
 *.class
 
