@@ -18,6 +18,7 @@ public class RosterScene extends AbstractPlayerListView {
     public RosterScene(Stage window, TeamManager teamManager, NFLPlayerManager playerManager) {
         super(window, "Roster", teamManager, playerManager);
         createScene(teamManager.getCurrentTeam());
+        setPageName(teamManager.getCurrentTeam().getName()+ " Roster");
     }
 
     @Override

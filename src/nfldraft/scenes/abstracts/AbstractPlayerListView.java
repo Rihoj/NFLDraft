@@ -74,6 +74,7 @@ public abstract class AbstractPlayerListView extends AbstractScene {
     }
 
     protected final void createRightVbox() {
+        rightVbox.setPadding(new Insets(10));
         rightVbox.prefHeight(430);
         rightVbox.prefWidth(400);
         rightVbox.setAlignment(Pos.TOP_LEFT);
@@ -87,8 +88,8 @@ public abstract class AbstractPlayerListView extends AbstractScene {
         statsHbox.prefWidth(430);
         GridPane statsGrid = new GridPane();
         statsGrid.setPadding(new Insets(10));
-        statsGrid.setVgap(100);
-        statsGrid.setHgap(100);
+        statsGrid.setVgap(50);
+        statsGrid.setHgap(75);
         statsGrid.prefHeight(320);
         statsGrid.prefWidth(430);
         statsGrid.add(rosterStatOne, 0, 0);

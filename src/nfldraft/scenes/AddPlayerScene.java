@@ -12,7 +12,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import nfldraft.classes.NFLPlayer;
 import nfldraft.classes.Team;
-import nfldraft.interfaces.HasPlayers;
 import nfldraft.managers.NFLPlayerManager;
 import nfldraft.managers.TeamManager;
 import nfldraft.scenes.abstracts.AbstractPlayerListView;
@@ -23,6 +22,7 @@ public class AddPlayerScene extends AbstractPlayerListView{
 
     public AddPlayerScene(Stage window, TeamManager teamManager, NFLPlayerManager playerManager) {
         super(window, "Add Player", teamManager, playerManager);
+        setPageName("Player Manager");
         createScene(playerManager);
     }
 
