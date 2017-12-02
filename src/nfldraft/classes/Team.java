@@ -9,8 +9,9 @@ package nfldraft.classes;
 
 import nfldraft.helpers.NameHelper;
 import java.util.ArrayList;
+import nfldraft.interfaces.HasPlayers;
 
-public class Team {
+public class Team implements HasPlayers{
 
     //Name of the team
     private final String name;
@@ -36,6 +37,11 @@ public class Team {
         this.name = name;
         this.owner = owner;
         this.players = players;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
     //return the name of the team.

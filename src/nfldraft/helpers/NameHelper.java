@@ -23,10 +23,17 @@ public class NameHelper {
         "Tryniski", "Green", "Evans", "King", "Baker", "John", "Harris", "Roberts", "Campbell", "James", "Stewart", "Lee", "County", "Turner"
     };
 
+    //List of possible adjectives. Provided by: http://www.enchantedlearning.com/wordlist/adjectives.shtml
+    private static final String[] TEAM_NAMES_PREFIX = {
+        "Abandoned", "Able", "Absolute", "Adorable", "Adventurous", "Academic", "Acceptable", "Acclaimed", "Accomplished", "Accurate", "Aching",
+        "Acidic", "Acrobatic", "Active", "Actual", "Adept", "Admirable", "Admired", "Adolescent", "Adorable", "Adored", "Advanced", "Afraid",
+        "Affectionate", "Aged", "Aggravating", "Babyish", "Bad", "Back", "Baggy", "Bare", "Barren", "Basic", "Beautiful", "Belated", "Beloved",
+        "Beneficial", "Better", "Best", "Bewitched", "Big", "Big-hearted", "Biodegradable", "Bite-sized", "Bitter", "Black"
+    };
     //List of possible team names. Provided by: https://en.wikipedia.org/wiki/List_of_U.S._state_mammals
     private static final String[] TEAM_NAMES = {
-        "Black Bears", "Ring-tailed Cats", "White-tailed Deers", "Grizzly Bears", "Bighorn Sheep",
-        "Panthers", "Bison", "Malamutes", "Grey Foxes", "Gray Squirrels", "Main Coons", "Calicos",
+        "Black Bears", "Cats", "Deers", "Grizzly Bears", "Bighorn Sheep",
+        "Panthers", "Bison", "Malamutes", "Foxes", "Squirrels", "Main Coons", "Calicos",
         "Boston Terriers", "Dolphins", "Mules", "Chinooks", "Beavers", "Great Danes", "Coyotes"
     };
 
@@ -49,7 +56,8 @@ public class NameHelper {
 
     //Generate a team name.
     public static String generateTeamName() {
+        int randomNumPrefix = ThreadLocalRandom.current().nextInt(0, TEAM_NAMES_PREFIX.length);
         int randomNum = ThreadLocalRandom.current().nextInt(0, TEAM_NAMES.length);
-        return TEAM_NAMES[randomNum];
+        return TEAM_NAMES_PREFIX[randomNumPrefix] +" "+ TEAM_NAMES[randomNum];
     }
 }

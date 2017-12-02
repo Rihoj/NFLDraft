@@ -21,7 +21,7 @@ public class NFLPlayerDriver {
 
     private static int errorCount = 0;
     private static int successCount = 0;
-    private static final int NUMER_OF_TEAMS = 2;
+    private static final int NUMBER_OF_TEAMS = 2;
     private static final int NUMBER_OF_PLAYERS = 5;
 
     public static void main(String[] args) {
@@ -67,16 +67,11 @@ public class NFLPlayerDriver {
     private static boolean createPositionTest() {
         boolean testStatus = false;
         try {
-            PositionInterface defensePosition = new DefensePosition();
+            PositionInterface defensePosition = new DefensivePlayer();
             logOut("Created Defense Postion with stats of " + defensePosition.getStats() + ".");
-            PositionInterface defensePositionWithData = new DefensePosition(1, 2, 3, 4, 5);
-            logOut("Created Defense Postion with defined stats of " + defensePositionWithData.getStats() + ".");
 
-            PositionInterface offensePosition = new OffensePosition();
+            PositionInterface offensePosition = new OffensivePlayer();
             logOut("Created Offense Postion with stats of " + offensePosition.getStats() + ".");
-            PositionInterface offensePositionWithData = new OffensePosition(1, 2, 3, 4, 5);
-            logOut("Created Offense Postion with defined stats of " + offensePositionWithData.getStats() + ".");
-
             testStatus = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,11 +113,11 @@ public class NFLPlayerDriver {
             String firstName = "James";
             String lastName = "Ray";
             int age = 25;
-            PositionInterface defensePosition = new DefensePosition();
+            PositionInterface defensePosition = new DefensivePlayer();
             NFLPlayer defensePlayer = new NFLPlayer(firstName, lastName, age, defensePosition);
             logOut("Player " + defensePlayer.getFullName() + " was created with the position of "+defensePlayer.getPosition().getPositionType() +".");
 
-            PositionInterface offensePosition = new OffensePosition();
+            PositionInterface offensePosition = new OffensivePlayer();
             NFLPlayer offensePlayer = new NFLPlayer(firstName, lastName, age, offensePosition);
             logOut("Player " + offensePlayer.getFullName() + " was created with the position of "+offensePlayer.getPosition().getPositionType() +".");
 
@@ -143,11 +138,11 @@ public class NFLPlayerDriver {
         logOut("");
         logOut("BeginingFull Test.");
         try {
-            Team[] teams = new Team[NUMER_OF_TEAMS];
+            Team[] teams = new Team[NUMBER_OF_TEAMS];
             logOut("");
             logOut("");
             logOut("Creating teams.");
-            for(int i=0; i < NUMER_OF_TEAMS; i++){
+            for(int i=0; i < NUMBER_OF_TEAMS; i++){
                 logOut("");
                 teams[i] = new Team();
                 logOut("Team created. Name: "+teams[i].getName()+ " Owner: "+teams[i].getOwner());

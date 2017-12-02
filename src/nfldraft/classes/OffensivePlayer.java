@@ -7,12 +7,11 @@
  */
 package nfldraft.classes;
 
-import nfldraft.interfaces.PositionInterface;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class OffensePosition implements PositionInterface {
+public class OffensivePlayer extends NFLPlayer {
 
     //Number of passing yards a player has.
     private final int passingYards;
@@ -25,25 +24,16 @@ public class OffensePosition implements PositionInterface {
     //number of sacks a player has made.
     private final int sacks;
     //A map of the statistics for the player.
-    private final Map<String, Integer> stats = new HashMap<>();
+    private final Map<String, Integer> stats = new LinkedHashMap<>();
 
     //Randomly generate stats for this position.
-    public OffensePosition() {
+    public OffensivePlayer() {
+        super();
         passingYards = ThreadLocalRandom.current().nextInt(0, 500);
         rushingYards = ThreadLocalRandom.current().nextInt(0, 500);
         receivingYards = ThreadLocalRandom.current().nextInt(0, 500);
         touchDowns = ThreadLocalRandom.current().nextInt(0, 50);
         sacks = ThreadLocalRandom.current().nextInt(0, 75);
-
-    }
-
-    //Create the position with predefined stats
-    public OffensePosition(int passingYards, int rushingYards, int receivingYards, int touchDowns, int sacks) {
-        this.passingYards = passingYards;
-        this.rushingYards = rushingYards;
-        this.receivingYards = receivingYards;
-        this.touchDowns = touchDowns;
-        this.sacks = sacks;
     }
 
     //Return the statistics for this player.
