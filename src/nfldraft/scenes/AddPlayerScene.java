@@ -43,7 +43,7 @@ public class AddPlayerScene extends AbstractPlayerListView implements IsSceneVie
     protected final void addActions() {
         HBox actionsHbox = new HBox(50);
         actionsHbox.prefHeight(100);
-        actionsHbox.prefWidth(200);
+        actionsHbox.prefWidth(400);
         Button addPlayer = new Button("Recruit Player");
         addPlayer.getStyleClass().add("primary");
         addPlayer.setOnAction(e -> {
@@ -51,10 +51,14 @@ public class AddPlayerScene extends AbstractPlayerListView implements IsSceneVie
             if(currentPlayer != null){
                 teamManager.getCurrentTeam().addPlayer(currentPlayer);
             }
-            sceneManager.switchScene("Roster");
-            RosterScene rosterScene = new RosterScene(window, teamManager, playerManager);
         });
-        rightVbox.getChildren().add(addPlayer);
+        Button returnToRoster = new Button("Return to Roster");
+        returnToRoster.getStyleClass().add("primary");
+        returnToRoster.setOnAction(e -> {
+            sceneManager.switchScene("Roster");
+        });
+        actionsHbox.getChildren().addAll(addPlayer, returnToRoster);
+        rightVbox.getChildren().add(actionsHbox);
     }
     
 }

@@ -7,6 +7,7 @@
  */
 package nfldraft.scenes;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -37,7 +38,7 @@ public class RosterScene extends AbstractPlayerListView implements IsSceneView {
     protected final void addActions() {
         HBox actionsHbox = new HBox(50);
         actionsHbox.prefHeight(100);
-        actionsHbox.prefWidth(200);
+        actionsHbox.prefWidth(400);
         Button addPlayer = new Button("View Players");
         addPlayer.getStyleClass().add("primary");
         addPlayer.setOnAction(e -> {

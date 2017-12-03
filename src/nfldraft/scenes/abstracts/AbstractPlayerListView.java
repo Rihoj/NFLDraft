@@ -39,8 +39,8 @@ public abstract class AbstractPlayerListView extends AbstractScene {
     protected Label teamLabel = new Label("Team: ");
     protected Label positionLabel = new Label("Player Position: ");
     protected Label statsLabel = new Label("Player Stats:");
-    protected VBox rosterVBox = new VBox(10);
-    protected VBox rightVbox = new VBox(10);
+    protected VBox rosterVBox = new VBox(20);
+    protected VBox rightVbox = new VBox(20);
     protected ListView roster;
 
     public AbstractPlayerListView(Stage window, String windowName, TeamManager teamManager, NFLPlayerManager playerManager) {
@@ -51,7 +51,6 @@ public abstract class AbstractPlayerListView extends AbstractScene {
         createRosterView(hasPlayers);
         createRightVbox();
         addRosterActionListener();
-        addActions();
     }
 
     protected final void createRosterView(HasPlayers hasPlayers) {
@@ -105,6 +104,7 @@ public abstract class AbstractPlayerListView extends AbstractScene {
 
         statsHbox.getChildren().add(statsGrid);
 
+        addActions();
         rightVbox.getChildren().add(teamLabel);
         rightVbox.getChildren().add(positionLabel);
         rightVbox.getChildren().add(statsLabel);
