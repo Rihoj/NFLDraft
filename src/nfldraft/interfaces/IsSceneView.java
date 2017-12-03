@@ -16,7 +16,7 @@ import nfldraft.managers.SceneManager;
  */
 public interface IsSceneView {
     abstract public Scene loadScene();
-    abstract public Scene getScene();
+    abstract public Scene updateScene();
     abstract public void addSceneManager(SceneManager sceneManager);
     abstract public String getWindowName();
 }

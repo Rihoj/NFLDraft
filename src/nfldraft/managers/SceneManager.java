@@ -43,7 +43,7 @@ public class SceneManager {
 
     public void switchScene(String scene) {
         if(sceneLoaded.get(scene)){
-            window.setScene(scenes.get(scene).getScene());
+            window.setScene(scenes.get(scene).updateScene());
             window.setTitle(sceneTitles.get(scene));
         }else{
             sceneLoaded.replace(scene, true);

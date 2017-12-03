@@ -36,17 +36,18 @@ public abstract class AbstractPlayerListView extends AbstractScene {
     protected Text rosterStatFour = new Text("N/A");
     protected Text rosterStatFive = new Text("N/A");
     protected Label currentRosterLabel = new Label("Current Roster");
+    protected Label teamLabel = new Label("Team: ");
     protected Label positionLabel = new Label("Player Position: ");
-    protected Label statsLabel = new Label("Player Stats");
-    protected VBox rosterVBox = new VBox();
-    protected VBox rightVbox = new VBox();
+    protected Label statsLabel = new Label("Player Stats:");
+    protected VBox rosterVBox = new VBox(10);
+    protected VBox rightVbox = new VBox(10);
     protected ListView roster;
 
     public AbstractPlayerListView(Stage window, String windowName, TeamManager teamManager, NFLPlayerManager playerManager) {
         super(window, windowName, teamManager, playerManager);
     }
 
-    protected final void createScene(HasPlayers hasPlayers){
+    protected final void createScene(HasPlayers hasPlayers) {
         createRosterView(hasPlayers);
         createRightVbox();
         addRosterActionListener();
@@ -65,12 +66,17 @@ public abstract class AbstractPlayerListView extends AbstractScene {
         roster = new ListView();
         roster.prefHeight(430);
         roster.prefWidth(200);
-        
-        ObservableList<NFLPlayer> items = FXCollections.observableList(hasPlayers.getPlayers());
-        roster.getItems().addAll(items);
+
+        updateRosterList(hasPlayers);;
         rosterVBox.getChildren().add(roster);
 
         content.getChildren().add(rosterVBox);
+    }
+
+    protected final void updateRosterList(HasPlayers hasPlayers) {
+        ObservableList<NFLPlayer> items = FXCollections.observableList(hasPlayers.getPlayers());
+        roster.getItems().clear();
+        roster.getItems().addAll(items);
     }
 
     protected final void createRightVbox() {
@@ -78,10 +84,9 @@ public abstract class AbstractPlayerListView extends AbstractScene {
         rightVbox.prefHeight(430);
         rightVbox.prefWidth(400);
         rightVbox.setAlignment(Pos.TOP_LEFT);
-        statsLabel.setFont(new Font(16));
+        statsLabel.setFont(new Font(14));
         rightVbox.setAlignment(Pos.TOP_LEFT);
         positionLabel.setFont(new Font(14));
-        rightVbox.getChildren().add(positionLabel);
         HBox statsHbox = new HBox();
         statsHbox.setAlignment(Pos.TOP_RIGHT);
         statsHbox.prefHeight(320);
@@ -100,6 +105,8 @@ public abstract class AbstractPlayerListView extends AbstractScene {
 
         statsHbox.getChildren().add(statsGrid);
 
+        rightVbox.getChildren().add(teamLabel);
+        rightVbox.getChildren().add(positionLabel);
         rightVbox.getChildren().add(statsLabel);
         rightVbox.getChildren().add(statsHbox);
         content.getChildren().add(rightVbox);
@@ -109,27 +116,38 @@ public abstract class AbstractPlayerListView extends AbstractScene {
         roster.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<NFLPlayer>() {
             @Override
             public void changed(ObservableValue<? extends NFLPlayer> observable, NFLPlayer oldValue, NFLPlayer newValue) {
-                positionLabel.setText("Player Position: " + newValue.getPositionType());
-                AtomicInteger i = new AtomicInteger(1);
-                for (Map.Entry<String, Integer> stat : newValue.getStats().entrySet()) {
-                    switch (i.get()) {
-                        case 1:
-                            rosterStatOne.setText(stat.getKey() + ": " + stat.getValue().toString());
-                            break;
-                        case 2:
-                            rosterStatTwo.setText(stat.getKey() + ": " + stat.getValue().toString());
-                            break;
-                        case 3:
-                            rosterStatThree.setText(stat.getKey() + ": " + stat.getValue().toString());
-                            break;
-                        case 4:
-                            rosterStatFour.setText(stat.getKey() + ": " + stat.getValue().toString());
-                            break;
-                        case 5:
-                            rosterStatFive.setText(stat.getKey() + ": " + stat.getValue().toString());
-                            break;
+                if (newValue != null) {
+                    teamLabel.setText("Team: " + ((newValue.getTeam() != null) ? newValue.getTeam() : "N/A"));
+                    positionLabel.setText("Player Position: " + newValue.getPositionType());
+                    AtomicInteger i = new AtomicInteger(1);
+                    for (Map.Entry<String, Integer> stat : newValue.getStats().entrySet()) {
+                        switch (i.get()) {
+                            case 1:
+                                rosterStatOne.setText(stat.getKey() + ": " + stat.getValue().toString());
+                                break;
+                            case 2:
+                                rosterStatTwo.setText(stat.getKey() + ": " + stat.getValue().toString());
+                                break;
+                            case 3:
+                                rosterStatThree.setText(stat.getKey() + ": " + stat.getValue().toString());
+                                break;
+                            case 4:
+                                rosterStatFour.setText(stat.getKey() + ": " + stat.getValue().toString());
+                                break;
+                            case 5:
+                                rosterStatFive.setText(stat.getKey() + ": " + stat.getValue().toString());
+                                break;
+                        }
+                        i.getAndIncrement();
                     }
-                    i.getAndIncrement();
+                }else{
+                    teamLabel.setText("Team: " + "N/A");
+                    positionLabel.setText("Player Position: ");
+                    rosterStatOne.setText("N/A");
+                    rosterStatTwo.setText("N/A");
+                    rosterStatThree.setText("N/A");
+                    rosterStatFour.setText("N/A");
+                    rosterStatFive.setText("N/A");
                 }
             }
         });

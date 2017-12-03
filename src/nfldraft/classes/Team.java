@@ -61,8 +61,10 @@ public class Team implements HasPlayers{
 
     //Add a single player to the team.
     public void addPlayer(NFLPlayer player) {
-        player.setTeam(this);
-        this.players.add(player);
+        if(players.indexOf(player) == -1){
+            player.setTeam(this);
+            this.players.add(player);
+        }
     }
 
     //remove a signle player from the team.
