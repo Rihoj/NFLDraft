@@ -23,6 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import nfldraft.classes.Team;
 import nfldraft.managers.NFLPlayerManager;
+import nfldraft.managers.SceneManager;
 import nfldraft.managers.TeamManager;
 
 public class NFLDraft extends Application {
@@ -30,10 +31,12 @@ public class NFLDraft extends Application {
     Stage window;
     TeamManager teamManager = new TeamManager();
     NFLPlayerManager playerManager = new NFLPlayerManager();
+    SceneManager sceneManager;
 
     @Override
     public void start(Stage primaryStage) {
         window = primaryStage;
+        sceneManager = new SceneManager(window, teamManager, playerManager);
         VBox root = new VBox(20);
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(25));
@@ -48,7 +51,7 @@ public class NFLDraft extends Application {
         Button teamSelect = new Button("Choose Team");
         teamSelect.setOnAction(e -> {
             teamManager.setCurrentTeam((Team) teamSelector.getValue());
-            RosterScene rosterScene = new RosterScene(window, teamManager, playerManager);
+            sceneManager.switchScene("Roster");
         });
         teamSelect.setAlignment(Pos.CENTER);
         teamSelect.getStyleClass().add("primary");
@@ -61,18 +64,6 @@ public class NFLDraft extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-    }
-
-    
-
-    public static MenuBar getMenuBar(Stage window) {
-        MenuItem closeFileMenuItem = new MenuItem("Close");
-        closeFileMenuItem.setOnAction(e -> window.close());
-        Menu fileMenu = new Menu("File", null, closeFileMenuItem);
-        Menu editMenu = new Menu("Edit");
-        Menu helpMenu = new Menu("Help");
-        MenuBar menuBar = new MenuBar(fileMenu, editMenu, helpMenu);
-        return menuBar;
     }
 
     /**

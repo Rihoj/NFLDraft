@@ -10,6 +10,9 @@ package nfldraft.scenes.abstracts;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -24,25 +27,16 @@ public class AbstractScene {
     protected HBox content;
     protected Label pageName = new Label();
     private final String windowName;
-    private final boolean withMenuBar;
     protected NFLPlayerManager playerManager;
     protected TeamManager teamManager;
-
-    public AbstractScene(Stage window, String windowName, TeamManager teamManager, NFLPlayerManager playerManager, boolean withMenuBar) {
-        this.window = window;
-        this.windowName = windowName;
-        this.withMenuBar = withMenuBar;
-        this.playerManager = playerManager;
-        this.teamManager = teamManager;
-        createScene();
-    }
+    protected SceneManager sceneManager;
+    Scene scene;
 
     public AbstractScene(Stage window, String windowName, TeamManager teamManager, NFLPlayerManager playerManager) {
         this.window = window;
         this.windowName = windowName;
         this.playerManager = playerManager;
         this.teamManager = teamManager;
-        this.withMenuBar = true;
         createScene();
     }
 
@@ -55,23 +49,32 @@ public class AbstractScene {
         content = new HBox(50);
         content.prefHeight(480);
         content.prefWidth(800);
-        if(withMenuBar){
-            root.getChildren().addAll(NFLDraft.getMenuBar(window), pageName, content);
-        }else{
-            root.getChildren().addAll(pageName, content);
-        }
-        Scene scene = new Scene(root, 800, 480);
+        root.getChildren().addAll(pageName, content);
+        scene = new Scene(root, 800, 480);
         scene.getStylesheets().add("resources/css/bootstrap3.css");
-        window.setTitle("NFLDraft - "+windowName);
-        window.setScene(scene);
     }
 
+//      removed due to NPE. Might bring back if a usage is found.
+//    private MenuBar getMenuBar() {
+//        MenuItem closeFileMenuItem = new MenuItem("Close");
+//        closeFileMenuItem.setOnAction(e -> window.close());
+//        Menu fileMenu = new Menu("File", null, closeFileMenuItem);
+//        Menu editMenu = new Menu("Edit");
+//        Menu helpMenu = new Menu("Help");
+//        MenuBar menuBar = new MenuBar(fileMenu, editMenu, helpMenu);
+//        return menuBar;
+//    }
+    public final Scene getScene(){
+        return scene;
+    }
     protected final void setPageName(String pageName) {
-        System.out.println(pageName);
-        System.out.println(this.pageName);
         this.pageName.setText(pageName);
-        System.out.println(this.pageName);
-
+    }
+    public final String getWindowName(){
+        return windowName;
+    }
+    public void addSceneManager(SceneManager sceneManager) {
+        this.sceneManager = sceneManager;
     }
 
 }

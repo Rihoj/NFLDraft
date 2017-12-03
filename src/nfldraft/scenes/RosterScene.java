@@ -7,18 +7,25 @@
  */
 package nfldraft.scenes;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import nfldraft.interfaces.IsSceneView;
 import nfldraft.managers.*;
 import nfldraft.scenes.abstracts.AbstractPlayerListView;
 
-public class RosterScene extends AbstractPlayerListView {
+public class RosterScene extends AbstractPlayerListView implements IsSceneView {
 
     public RosterScene(Stage window, TeamManager teamManager, NFLPlayerManager playerManager) {
         super(window, "Roster", teamManager, playerManager);
+    }
+
+    @Override
+    public Scene loadScene() {
         createScene(teamManager.getCurrentTeam());
-        setPageName(teamManager.getCurrentTeam().getName()+ " Roster");
+        setPageName(teamManager.getCurrentTeam().getName() + " Roster");
+        return getScene();
     }
 
     @Override
@@ -29,7 +36,7 @@ public class RosterScene extends AbstractPlayerListView {
         Button addPlayer = new Button("View Players");
         addPlayer.getStyleClass().add("primary");
         addPlayer.setOnAction(e -> {
-            AddPlayerScene addPlayerScene = new AddPlayerScene(window, teamManager, playerManager);
+            sceneManager.switchScene("AddPlayer");
         });
         rightVbox.getChildren().add(addPlayer);
     }

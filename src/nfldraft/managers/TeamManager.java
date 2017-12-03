@@ -70,7 +70,11 @@ public class TeamManager {
     }
 
     public Team getCurrentTeam() {
-        return currentTeam;
+        if(currentTeam != null){
+            return currentTeam;
+        }else{
+            return teams.get(0);
+        }
     }
 
     public void setCurrentTeam(Team currentTeam) {
