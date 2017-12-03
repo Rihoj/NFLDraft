@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class DefensivePlayer extends NFLPlayer{
+public class DefensivePlayer extends NFLPlayer {
 
     //Number of tackles the player has made.
     private final int tackles;

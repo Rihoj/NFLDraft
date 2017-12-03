@@ -11,7 +11,7 @@ import nfldraft.helpers.NameHelper;
 import java.util.ArrayList;
 import nfldraft.interfaces.HasPlayers;
 
-public class Team implements HasPlayers{
+public class Team implements HasPlayers {
 
     //Name of the team
     private final String name;
@@ -62,20 +62,21 @@ public class Team implements HasPlayers{
 
     //Add a single player to the team.
     public void addPlayer(NFLPlayer player) {
-        if(players.indexOf(player) == -1){
+        if (players.indexOf(player) == -1) {
             player.setTeam(this);
             this.players.add(player);
         }
     }
 
     //remove a signle player from the team.
-    public void removePlayer(NFLPlayer player){
-        if(players.indexOf(player) > -1){
+    public void removePlayer(NFLPlayer player) {
+        if (players.indexOf(player) > -1) {
             players.remove(player);
         }
     }
+
     public void firePlayer(NFLPlayer player) {
-        if(players.indexOf(player) > -1){
+        if (players.indexOf(player) > -1) {
             players.remove(player);
             player.setTeam(null);
         }

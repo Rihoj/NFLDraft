@@ -1,7 +1,7 @@
 /**
  * Program: NFLDraft
  * File: AbstractPlayerListView.java
- * Summary:
+ * Summary: Abstract scene view.
  * Author: James Ray
  * Date: Dec 2, 2017
  */
@@ -22,7 +22,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import nfldraft.classes.NFLPlayer;
 import nfldraft.interfaces.HasPlayers;
 import nfldraft.managers.NFLPlayerManager;
@@ -30,11 +29,12 @@ import nfldraft.managers.TeamManager;
 
 public abstract class AbstractPlayerListView extends AbstractScene {
 
-    protected Text rosterStatOne = new Text("N/A");
-    protected Text rosterStatTwo = new Text("N/A");
-    protected Text rosterStatThree = new Text("N/A");
-    protected Text rosterStatFour = new Text("N/A");
-    protected Text rosterStatFive = new Text("N/A");
+    //The first stat to
+    protected Text firstPlayerStatLabel = new Text("N/A");
+    protected Text secondPlayerStatLabel = new Text("N/A");
+    protected Text thirdPlayerStatLabel = new Text("N/A");
+    protected Text fourthPlayerStatLabel = new Text("N/A");
+    protected Text fifthPlayerStatLabel = new Text("N/A");
     protected Label currentRosterLabel = new Label("Current Roster");
     protected Label teamLabel = new Label("Team: ");
     protected Label positionLabel = new Label("Player Position: ");
@@ -44,10 +44,22 @@ public abstract class AbstractPlayerListView extends AbstractScene {
     protected ListView roster;
     protected Text message;
 
-    public AbstractPlayerListView(Stage window, String windowName, TeamManager teamManager, NFLPlayerManager playerManager) {
-        super(window, windowName, teamManager, playerManager);
+    /**
+     * Create the class through the super.
+     *
+     * @param windowName
+     * @param teamManager
+     * @param playerManager
+     */
+    public AbstractPlayerListView(String windowName, TeamManager teamManager, NFLPlayerManager playerManager) {
+        super(windowName, teamManager, playerManager);
     }
 
+    /**
+     * Create the scene layouts.
+     *
+     * @param hasPlayers
+     */
     protected final void createScene(HasPlayers hasPlayers) {
         createRosterView(hasPlayers);
         createRightVbox();
@@ -55,6 +67,11 @@ public abstract class AbstractPlayerListView extends AbstractScene {
         createMessageView();
     }
 
+    /**
+     * Create the roster view layout.
+     *
+     * @param hasPlayers
+     */
     protected final void createRosterView(HasPlayers hasPlayers) {
         rosterVBox.setPadding(new Insets(10));
         rosterVBox.setAlignment(Pos.TOP_LEFT);
@@ -74,12 +91,20 @@ public abstract class AbstractPlayerListView extends AbstractScene {
         content.getChildren().add(rosterVBox);
     }
 
+    /**
+     * Update the roster list
+     *
+     * @param hasPlayers
+     */
     protected final void updateRosterList(HasPlayers hasPlayers) {
         ObservableList<NFLPlayer> items = FXCollections.observableList(hasPlayers.getPlayers());
         roster.getItems().clear();
         roster.getItems().addAll(items);
     }
 
+    /**
+     * Create the right hand side layout.
+     */
     protected final void createRightVbox() {
         rightVbox.setPadding(new Insets(10));
         rightVbox.prefHeight(430);
@@ -98,11 +123,11 @@ public abstract class AbstractPlayerListView extends AbstractScene {
         statsGrid.setHgap(75);
         statsGrid.prefHeight(320);
         statsGrid.prefWidth(430);
-        statsGrid.add(rosterStatOne, 0, 0);
-        statsGrid.add(rosterStatTwo, 1, 0);
-        statsGrid.add(rosterStatThree, 0, 1);
-        statsGrid.add(rosterStatFour, 1, 1);
-        statsGrid.add(rosterStatFive, 0, 2);
+        statsGrid.add(firstPlayerStatLabel, 0, 0);
+        statsGrid.add(secondPlayerStatLabel, 1, 0);
+        statsGrid.add(thirdPlayerStatLabel, 0, 1);
+        statsGrid.add(fourthPlayerStatLabel, 1, 1);
+        statsGrid.add(fifthPlayerStatLabel, 0, 2);
 
         statsHbox.getChildren().add(statsGrid);
 
@@ -114,6 +139,9 @@ public abstract class AbstractPlayerListView extends AbstractScene {
         content.getChildren().add(rightVbox);
     }
 
+    /**
+     * Add the action listener to the roster.
+     */
     protected final void addRosterActionListener() {
         roster.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<NFLPlayer>() {
             @Override
@@ -125,19 +153,19 @@ public abstract class AbstractPlayerListView extends AbstractScene {
                     for (Map.Entry<String, Integer> stat : newValue.getStats().entrySet()) {
                         switch (i.get()) {
                             case 1:
-                                rosterStatOne.setText(stat.getKey() + ": " + stat.getValue().toString());
+                                firstPlayerStatLabel.setText(stat.getKey() + ": " + stat.getValue().toString());
                                 break;
                             case 2:
-                                rosterStatTwo.setText(stat.getKey() + ": " + stat.getValue().toString());
+                                secondPlayerStatLabel.setText(stat.getKey() + ": " + stat.getValue().toString());
                                 break;
                             case 3:
-                                rosterStatThree.setText(stat.getKey() + ": " + stat.getValue().toString());
+                                thirdPlayerStatLabel.setText(stat.getKey() + ": " + stat.getValue().toString());
                                 break;
                             case 4:
-                                rosterStatFour.setText(stat.getKey() + ": " + stat.getValue().toString());
+                                fourthPlayerStatLabel.setText(stat.getKey() + ": " + stat.getValue().toString());
                                 break;
                             case 5:
-                                rosterStatFive.setText(stat.getKey() + ": " + stat.getValue().toString());
+                                fifthPlayerStatLabel.setText(stat.getKey() + ": " + stat.getValue().toString());
                                 break;
                         }
                         i.getAndIncrement();
@@ -146,27 +174,46 @@ public abstract class AbstractPlayerListView extends AbstractScene {
                 } else {
                     teamLabel.setText("Team: " + "N/A");
                     positionLabel.setText("Player Position: ");
-                    rosterStatOne.setText("N/A");
-                    rosterStatTwo.setText("N/A");
-                    rosterStatThree.setText("N/A");
-                    rosterStatFour.setText("N/A");
-                    rosterStatFive.setText("N/A");
+                    firstPlayerStatLabel.setText("N/A");
+                    secondPlayerStatLabel.setText("N/A");
+                    thirdPlayerStatLabel.setText("N/A");
+                    fourthPlayerStatLabel.setText("N/A");
+                    fifthPlayerStatLabel.setText("N/A");
                     disableButtons();
                 }
             }
         });
     }
 
+    /**
+     * Create the message layout.
+     */
     protected void createMessageView() {
         message = new Text();
         root.getChildren().add(message);
     }
 
+    /**
+     * Set the message for this scene.
+     *
+     * @param incomingMessage
+     */
     public void setMessage(String incomingMessage) {
         message.setText(incomingMessage);
     }
 
+    /**
+     * Add action buttons to the scene.
+     */
     abstract protected void addActions();
+
+    /**
+     * Disable any buttons that can not be used when no player is selected.
+     */
     abstract protected void disableButtons();
+
+    /**
+     * Enable any buttons that can be used when a player is selected.
+     */
     abstract protected void enableButtons();
 }

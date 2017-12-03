@@ -69,14 +69,24 @@ public class TeamManager {
         return teams;
     }
 
+    /**
+     * Returns the currently selected team.
+     *
+     * @return
+     */
     public Team getCurrentTeam() {
-        if(currentTeam != null){
+        if (currentTeam != null) {
             return currentTeam;
-        }else{
+        } else {
             return teams.get(0);
         }
     }
 
+    /**
+     * Sets the currently selected team.
+     *
+     * @param currentTeam
+     */
     public void setCurrentTeam(Team currentTeam) {
         this.currentTeam = currentTeam;
     }

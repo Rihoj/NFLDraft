@@ -1,7 +1,7 @@
 /**
  * Program: NFLDraft
  * File: AddPlayerScene.java
- * Summary:
+ * Summary: This is the scene that displays the players from the player manager and allows TEAM CEOs to recruit players.
  * Author: James Ray
  * Date: Dec 2, 2017
  */
@@ -10,22 +10,32 @@ package nfldraft.scenes;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import nfldraft.classes.NFLPlayer;
-import nfldraft.classes.Team;
 import nfldraft.interfaces.IsSceneView;
 import nfldraft.managers.NFLPlayerManager;
 import nfldraft.managers.TeamManager;
 import nfldraft.scenes.abstracts.AbstractPlayerListView;
 
-public class AddPlayerScene extends AbstractPlayerListView implements IsSceneView{
+public class AddPlayerScene extends AbstractPlayerListView implements IsSceneView {
 
+    //Create the button for viewing players.
     private Button addPlayer;
-    public AddPlayerScene(Stage window, TeamManager teamManager, NFLPlayerManager playerManager) {
-        super(window, "Add Player", teamManager, playerManager);
+
+    /**
+     * Build up the Add Player Scene class.
+     *
+     * @param teamManager
+     * @param playerManager
+     */
+    public AddPlayerScene(TeamManager teamManager, NFLPlayerManager playerManager) {
+        super("Add Player", teamManager, playerManager);
     }
 
-
+    /**
+     * Creates and returns the scene.
+     *
+     * @return Scene
+     */
     @Override
     public Scene loadScene() {
         setPageName("Player Manager");
@@ -33,14 +43,22 @@ public class AddPlayerScene extends AbstractPlayerListView implements IsSceneVie
         disableButtons();
         return getScene();
     }
-    
+
+    /**
+     * Updates and returns the scene.
+     *
+     * @return Scene
+     */
     @Override
-    public Scene updateScene(){
+    public Scene updateScene() {
         updateRosterList(playerManager);
         disableButtons();
         return getScene();
     }
 
+    /**
+     * Add action buttons to the scene.
+     */
     @Override
     protected final void addActions() {
         HBox actionsHbox = new HBox(50);
@@ -50,10 +68,10 @@ public class AddPlayerScene extends AbstractPlayerListView implements IsSceneVie
         addPlayer.getStyleClass().add("primary");
         addPlayer.setOnAction(e -> {
             NFLPlayer currentPlayer = (NFLPlayer) roster.getSelectionModel().getSelectedItem();
-            if(currentPlayer != null){
+            if (currentPlayer != null) {
                 teamManager.getCurrentTeam().addPlayer(currentPlayer);
                 disableButtons();
-                setMessage("You have added "+currentPlayer.getFullName()+" to your roster.");
+                setMessage("You have added " + currentPlayer.getFullName() + " to your roster.");
             }
         });
         Button returnToRoster = new Button("Return to Roster");
@@ -65,16 +83,20 @@ public class AddPlayerScene extends AbstractPlayerListView implements IsSceneVie
         rightVbox.getChildren().add(actionsHbox);
     }
 
+    /**
+     * Disable any buttons that can not be used when no player is selected.
+     */
     @Override
     protected void disableButtons() {
         addPlayer.setDisable(true);
     }
 
+    /**
+     * Enable any buttons that can be used when a player is selected.
+     */
     @Override
     protected void enableButtons() {
         addPlayer.setDisable(false);
     }
 
-    
-    
 }

@@ -86,6 +86,7 @@ public abstract class NFLPlayer {
             team = null;
         }
     }
+
     //All positions must have statistics and be able to return them as a Map<String, Integer>
     abstract public Map<String, Integer> getStats();
 

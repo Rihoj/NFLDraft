@@ -1,7 +1,7 @@
 /**
  * Program: NFLDraft
  * File: AbstractScene.java
- * Summary:
+ * Summary: This controls the team select scene.
  * Author: James Ray
  * Date: Dec 2, 2017
  */
@@ -9,29 +9,32 @@ package nfldraft.scenes;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import nfldraft.scenes.abstracts.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import nfldraft.classes.Team;
 import nfldraft.interfaces.IsSceneView;
 import nfldraft.managers.*;
 
 public class TeamSelectScene extends AbstractScene implements IsSceneView {
 
-    public TeamSelectScene(Stage window, TeamManager teamManager, NFLPlayerManager playerManager) {
-        super(window, "Choose Team", teamManager, playerManager);
+    /**
+     * Constructor for class.
+     *
+     * @param teamManager
+     * @param playerManager
+     */
+    public TeamSelectScene(TeamManager teamManager, NFLPlayerManager playerManager) {
+        super("Choose Team", teamManager, playerManager);
     }
 
+    /**
+     * Load the scene.
+     *
+     * @return Scene
+     */
     @Override
     public Scene loadScene() {
         setPageName("Choose your team!");
@@ -39,6 +42,9 @@ public class TeamSelectScene extends AbstractScene implements IsSceneView {
         return getScene();
     }
 
+    /**
+     * Creates the scene.
+     */
     private void createScene() {
         ObservableList<Team> oTeamList = FXCollections.observableList(teamManager.getTeams());
         ChoiceBox teamSelector = new ChoiceBox(oTeamList);
@@ -55,9 +61,14 @@ public class TeamSelectScene extends AbstractScene implements IsSceneView {
         root.getChildren().add(teamSelect);
     }
 
+    /**
+     * No updates were needed but still need to return the scene.
+     *
+     * @return
+     */
     @Override
     public Scene updateScene() {
         return getScene();
     }
-    
+
 }

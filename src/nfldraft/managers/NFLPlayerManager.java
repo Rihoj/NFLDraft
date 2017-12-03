@@ -13,7 +13,7 @@ import nfldraft.classes.NFLPlayer;
 import nfldraft.classes.OffensivePlayer;
 import nfldraft.interfaces.HasPlayers;
 
-public class NFLPlayerManager implements HasPlayers{
+public class NFLPlayerManager implements HasPlayers {
 
     //The default number of players to create in createPlayers
     private static final int DEFAULT_CREATE_PLAYERS = 10;
@@ -66,10 +66,6 @@ public class NFLPlayerManager implements HasPlayers{
     @Override
     public ArrayList<NFLPlayer> getPlayers() {
         return players;
-    }
-
-    public NFLPlayer getPlayer(NFLPlayer player){
-        return player;
     }
 
 }

@@ -1,7 +1,7 @@
 /**
  * Program: NFLDraft
  * File: AbstractScene.java
- * Summary:
+ * Summary: A Base scene construction to base other scenes on.
  * Author: James Ray
  * Date: Dec 2, 2017
  */
@@ -21,6 +21,7 @@ import nfldraft.managers.*;
 
 public class AbstractScene {
 
+    //
     protected Stage window;
     protected VBox root;
     protected HBox content;
@@ -31,8 +32,7 @@ public class AbstractScene {
     protected SceneManager sceneManager;
     Scene scene;
 
-    public AbstractScene(Stage window, String windowName, TeamManager teamManager, NFLPlayerManager playerManager) {
-        this.window = window;
+    public AbstractScene(String windowName, TeamManager teamManager, NFLPlayerManager playerManager) {
         this.windowName = windowName;
         this.playerManager = playerManager;
         this.teamManager = teamManager;

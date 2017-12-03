@@ -1,7 +1,7 @@
 /**
  * Program: NFLDraft
  * File: NFLDraft.java
- * Summary:
+ * Summary: The main class to start the program.
  * Author: James Ray
  * Date: Nov 30, 2017
  */
@@ -15,15 +15,22 @@ import nfldraft.managers.TeamManager;
 
 public class NFLDraft extends Application {
 
-    Stage window;
+    //Create the TeamManager. Auto creates teams.
     TeamManager teamManager = new TeamManager();
+    //Create the NFLPlayerManager. Auto Creates players.
     NFLPlayerManager playerManager = new NFLPlayerManager();
+    //Create the SceneManager. Creates builds and loads sences.
     SceneManager sceneManager;
 
+    /**
+     * Assigns the window, set up the sceneManager, switches to first scene, and displays
+     * the window.
+     *
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
-        window = primaryStage;
-        sceneManager = new SceneManager(window, teamManager, playerManager);
+        sceneManager = new SceneManager(primaryStage, teamManager, playerManager);
         sceneManager.switchScene("TeamSelect");
         primaryStage.setResizable(false);
         primaryStage.show();
