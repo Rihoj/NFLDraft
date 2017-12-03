@@ -17,7 +17,7 @@ public class TeamManager {
     //The number of offensive players to create.
     private static final int NUMBER_OF_TEAMS = 10;
     //Array list of all players
-    private ArrayList<Team> teams = new ArrayList<>();
+    private final ArrayList<Team> teams = new ArrayList<>();
 
     private Team currentTeam;
 

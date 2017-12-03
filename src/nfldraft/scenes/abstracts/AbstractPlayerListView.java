@@ -29,19 +29,31 @@ import nfldraft.managers.TeamManager;
 
 public abstract class AbstractPlayerListView extends AbstractScene {
 
-    //The first stat to
+    //The first stat Label
     protected Text firstPlayerStatLabel = new Text("N/A");
+    //The second stat Label
     protected Text secondPlayerStatLabel = new Text("N/A");
+    //The third stat Label
     protected Text thirdPlayerStatLabel = new Text("N/A");
+    //The fourth stat Label
     protected Text fourthPlayerStatLabel = new Text("N/A");
+    //The fifth stat Label
     protected Text fifthPlayerStatLabel = new Text("N/A");
+    //The current roster label
     protected Label currentRosterLabel = new Label("Current Roster");
+    //The team Label
     protected Label teamLabel = new Label("Team: ");
+    //The position Label
     protected Label positionLabel = new Label("Player Position: ");
+    //The stats Label
     protected Label statsLabel = new Label("Player Stats:");
+    //The roster VBox
     protected VBox rosterVBox = new VBox(20);
+    //The right VBox
     protected VBox rightVbox = new VBox(20);
+    //The listview for roster
     protected ListView roster;
+    //The message text
     protected Text message;
 
     /**
