@@ -48,7 +48,7 @@ public class RosterScene extends AbstractPlayerListView implements IsSceneView {
         Button removePlayer = new Button("Remove Player");
         removePlayer.getStyleClass().add("primary");
         removePlayer.setOnAction(e -> {
-            teamManager.getCurrentTeam().removePlayer((NFLPlayer) roster.getSelectionModel().getSelectedItem());
+            teamManager.getCurrentTeam().firePlayer((NFLPlayer) roster.getSelectionModel().getSelectedItem());
             updateRosterList(teamManager.getCurrentTeam());
         });
 

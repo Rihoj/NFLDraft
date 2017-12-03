@@ -50,6 +50,7 @@ public class Team implements HasPlayers{
     }
 
     //return all players in the team.
+    @Override
     public ArrayList<NFLPlayer> getPlayers() {
         return players;
     }
@@ -69,11 +70,15 @@ public class Team implements HasPlayers{
 
     //remove a signle player from the team.
     public void removePlayer(NFLPlayer player){
-        players.remove(player);
+        if(players.indexOf(player) > -1){
+            players.remove(player);
+        }
     }
     public void firePlayer(NFLPlayer player) {
-        players.remove(player);
-        player.setTeam(null);
+        if(players.indexOf(player) > -1){
+            players.remove(player);
+            player.setTeam(null);
+        }
     }
 
     //Get the owner of the team,
