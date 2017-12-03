@@ -20,8 +20,7 @@ import nfldraft.scenes.abstracts.AbstractPlayerListView;
 
 public class AddPlayerScene extends AbstractPlayerListView implements IsSceneView{
 
-    private Team team;
-
+    private Button addPlayer;
     public AddPlayerScene(Stage window, TeamManager teamManager, NFLPlayerManager playerManager) {
         super(window, "Add Player", teamManager, playerManager);
     }
@@ -31,12 +30,14 @@ public class AddPlayerScene extends AbstractPlayerListView implements IsSceneVie
     public Scene loadScene() {
         setPageName("Player Manager");
         createScene(playerManager);
+        disableButtons();
         return getScene();
     }
     
     @Override
     public Scene updateScene(){
         updateRosterList(playerManager);
+        disableButtons();
         return getScene();
     }
 
@@ -45,12 +46,14 @@ public class AddPlayerScene extends AbstractPlayerListView implements IsSceneVie
         HBox actionsHbox = new HBox(50);
         actionsHbox.prefHeight(100);
         actionsHbox.prefWidth(400);
-        Button addPlayer = new Button("Recruit Player");
+        addPlayer = new Button("Recruit Player");
         addPlayer.getStyleClass().add("primary");
         addPlayer.setOnAction(e -> {
             NFLPlayer currentPlayer = (NFLPlayer) roster.getSelectionModel().getSelectedItem();
             if(currentPlayer != null){
                 teamManager.getCurrentTeam().addPlayer(currentPlayer);
+                disableButtons();
+                setMessage("You have added "+currentPlayer.getFullName()+" to your roster.");
             }
         });
         Button returnToRoster = new Button("Return to Roster");
@@ -61,5 +64,17 @@ public class AddPlayerScene extends AbstractPlayerListView implements IsSceneVie
         actionsHbox.getChildren().addAll(addPlayer, returnToRoster);
         rightVbox.getChildren().add(actionsHbox);
     }
+
+    @Override
+    protected void disableButtons() {
+        addPlayer.setDisable(true);
+    }
+
+    @Override
+    protected void enableButtons() {
+        addPlayer.setDisable(false);
+    }
+
+    
     
 }

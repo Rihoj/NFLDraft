@@ -19,6 +19,7 @@ import nfldraft.scenes.abstracts.AbstractPlayerListView;
 
 public class RosterScene extends AbstractPlayerListView implements IsSceneView {
 
+    private Button removePlayer;
     public RosterScene(Stage window, TeamManager teamManager, NFLPlayerManager playerManager) {
         super(window, "Roster", teamManager, playerManager);
     }
@@ -27,12 +28,14 @@ public class RosterScene extends AbstractPlayerListView implements IsSceneView {
     public Scene loadScene() {
         createScene(teamManager.getCurrentTeam());
         setPageName(teamManager.getCurrentTeam().getName() + " Roster");
+        disableButtons();
         return getScene();
     }
 
     @Override
     public Scene updateScene(){
         updateRosterList(teamManager.getCurrentTeam());
+        disableButtons();
         return getScene();
     }
     @Override
@@ -46,16 +49,29 @@ public class RosterScene extends AbstractPlayerListView implements IsSceneView {
             sceneManager.switchScene("AddPlayer");
         });
 
-        Button removePlayer = new Button("Remove Player");
+        removePlayer = new Button("Remove Player");
         removePlayer.getStyleClass().add("primary");
         removePlayer.setOnAction(e -> {
-            teamManager.getCurrentTeam().firePlayer((NFLPlayer) roster.getSelectionModel().getSelectedItem());
+            NFLPlayer player = (NFLPlayer) roster.getSelectionModel().getSelectedItem();
+            teamManager.getCurrentTeam().firePlayer(player);
             updateRosterList(teamManager.getCurrentTeam());
+            setMessage("You have fired "+player.getFullName()+ " from your team.");
         });
 
 
         actionsHbox.getChildren().addAll(addPlayer, removePlayer);
         rightVbox.getChildren().add(actionsHbox);
     }
+
+    @Override
+    protected void disableButtons() {
+        removePlayer.setDisable(true);
+    }
+
+    @Override
+    protected void enableButtons() {
+        removePlayer.setDisable(false);
+    }
+
 
 }

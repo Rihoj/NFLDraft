@@ -42,6 +42,7 @@ public abstract class AbstractPlayerListView extends AbstractScene {
     protected VBox rosterVBox = new VBox(20);
     protected VBox rightVbox = new VBox(20);
     protected ListView roster;
+    protected Text message;
 
     public AbstractPlayerListView(Stage window, String windowName, TeamManager teamManager, NFLPlayerManager playerManager) {
         super(window, windowName, teamManager, playerManager);
@@ -51,6 +52,7 @@ public abstract class AbstractPlayerListView extends AbstractScene {
         createRosterView(hasPlayers);
         createRightVbox();
         addRosterActionListener();
+        createMessageView();
     }
 
     protected final void createRosterView(HasPlayers hasPlayers) {
@@ -140,7 +142,8 @@ public abstract class AbstractPlayerListView extends AbstractScene {
                         }
                         i.getAndIncrement();
                     }
-                }else{
+                    enableButtons();
+                } else {
                     teamLabel.setText("Team: " + "N/A");
                     positionLabel.setText("Player Position: ");
                     rosterStatOne.setText("N/A");
@@ -148,10 +151,22 @@ public abstract class AbstractPlayerListView extends AbstractScene {
                     rosterStatThree.setText("N/A");
                     rosterStatFour.setText("N/A");
                     rosterStatFive.setText("N/A");
+                    disableButtons();
                 }
             }
         });
     }
 
+    protected void createMessageView() {
+        message = new Text();
+        root.getChildren().add(message);
+    }
+
+    public void setMessage(String incomingMessage) {
+        message.setText(incomingMessage);
+    }
+
     abstract protected void addActions();
+    abstract protected void disableButtons();
+    abstract protected void enableButtons();
 }
