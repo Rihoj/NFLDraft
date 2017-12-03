@@ -4,15 +4,6 @@ nbproject/
 # Compiled class file
 *.class
 
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
 # Package Files #
 *.jar
 *.war
@@ -20,3 +11,6 @@ nbproject/
 *.zip
 *.tar.gz
 *.rar
+
+build.xml
+manifest.mf
