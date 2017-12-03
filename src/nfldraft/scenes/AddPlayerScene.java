@@ -34,6 +34,7 @@ public class AddPlayerScene extends AbstractPlayerListView implements IsSceneVie
         return getScene();
     }
     
+    @Override
     public Scene updateScene(){
         updateRosterList(playerManager);
         return getScene();

@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import nfldraft.interfaces.IsSceneView;
 import nfldraft.scenes.AddPlayerScene;
 import nfldraft.scenes.RosterScene;
+import nfldraft.scenes.TeamSelectScene;
 
 public class SceneManager {
 
@@ -27,6 +28,9 @@ public class SceneManager {
     }
 
     private void setupScenes(TeamManager teamManager, NFLPlayerManager playerManager) {
+        TeamSelectScene teamSelect = new TeamSelectScene(window, teamManager, playerManager);
+        teamSelect.addSceneManager(this);
+        addScene("TeamSelect", teamSelect);
         RosterScene rosterScene = new RosterScene(window, teamManager, playerManager);
         rosterScene.addSceneManager(this);
         addScene("Roster", rosterScene);
@@ -44,11 +48,11 @@ public class SceneManager {
     public void switchScene(String scene) {
         if(sceneLoaded.get(scene)){
             window.setScene(scenes.get(scene).updateScene());
-            window.setTitle(sceneTitles.get(scene));
+            window.setTitle("NFLDraft - " + sceneTitles.get(scene));
         }else{
             sceneLoaded.replace(scene, true);
             window.setScene(scenes.get(scene).loadScene());
-            window.setTitle(sceneTitles.get(scene));
+            window.setTitle("NFLDraft - " + sceneTitles.get(scene));
         }
     }
 }

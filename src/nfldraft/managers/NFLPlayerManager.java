@@ -16,22 +16,13 @@ import nfldraft.interfaces.HasPlayers;
 public class NFLPlayerManager implements HasPlayers{
 
     //The default number of players to create in createPlayers
-    private static final int DEFAULT_CREATE_PLAYERS = 3;
-    //The number of offensive players to create.
-    private static final int NUMBER_OF_OFFENSIVE_PLAYERS = 5;
-    //The number of defensive players to create.
-    private static final int NUMBER_OF_DEFENSIVE_PLAYERS = 5;
+    private static final int DEFAULT_CREATE_PLAYERS = 10;
     //Array list of all players
     private ArrayList<NFLPlayer> players = new ArrayList<>();
 
     //Create the default set of players.
     public NFLPlayerManager() {
-        for (int i = 0; i < NUMBER_OF_OFFENSIVE_PLAYERS; i++) {
-            players.add(new OffensivePlayer());
-        }
-        for (int i = 0; i < NUMBER_OF_DEFENSIVE_PLAYERS; i++) {
-            players.add(new DefensivePlayer());
-        }
+        createPlayers();
     }
 
     //Return the NFLPlayerManager as a string.
@@ -49,14 +40,6 @@ public class NFLPlayerManager implements HasPlayers{
         for (int i = 0; i < DEFAULT_CREATE_PLAYERS; i++) {
             players.add(new OffensivePlayer());
             players.add(new DefensivePlayer());
-        }
-        return players;
-    }
-
-    //Create numberOfPlayers number of players
-    public ArrayList<NFLPlayer> createOffensivePlayers(int numberOfPlayers) {
-        for (int i = 0; i < numberOfPlayers; i++) {
-            players.add(new OffensivePlayer());
         }
         return players;
     }

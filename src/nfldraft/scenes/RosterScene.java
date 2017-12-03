@@ -30,6 +30,7 @@ public class RosterScene extends AbstractPlayerListView implements IsSceneView {
         return getScene();
     }
 
+    @Override
     public Scene updateScene(){
         updateRosterList(teamManager.getCurrentTeam());
         return getScene();

@@ -7,17 +7,16 @@
  */
 package nfldraft.scenes.abstracts;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import nfldraft.NFLDraft;
 import nfldraft.managers.*;
 
 public class AbstractScene {
@@ -41,29 +40,24 @@ public class AbstractScene {
     }
 
     private void createScene(){
-        root = new VBox();
+        root = new VBox(20);
+        root.setPadding(new Insets(10));
         root.prefHeight(480);
         root.prefWidth(800);
         root.setAlignment(Pos.CENTER);
+
+        Image logo = new Image("/resources/logo.png");
+        ImageView imageView = new ImageView(logo);
+        imageView.setPreserveRatio(true);
         pageName.setFont(new Font(20));
         content = new HBox(50);
         content.prefHeight(480);
         content.prefWidth(800);
-        root.getChildren().addAll(pageName, content);
-        scene = new Scene(root, 800, 480);
+        root.getChildren().addAll(imageView, pageName, content);
+        scene = new Scene(root);
         scene.getStylesheets().add("resources/css/bootstrap3.css");
     }
 
-//      removed due to NPE. Might bring back if a usage is found.
-//    private MenuBar getMenuBar() {
-//        MenuItem closeFileMenuItem = new MenuItem("Close");
-//        closeFileMenuItem.setOnAction(e -> window.close());
-//        Menu fileMenu = new Menu("File", null, closeFileMenuItem);
-//        Menu editMenu = new Menu("Edit");
-//        Menu helpMenu = new Menu("Help");
-//        MenuBar menuBar = new MenuBar(fileMenu, editMenu, helpMenu);
-//        return menuBar;
-//    }
     public final Scene getScene(){
         return scene;
     }
