@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import nfldraft.classes.NFLPlayer;
 import nfldraft.interfaces.IsSceneView;
 import nfldraft.managers.*;
 import nfldraft.scenes.abstracts.AbstractPlayerListView;
@@ -42,7 +43,17 @@ public class RosterScene extends AbstractPlayerListView implements IsSceneView {
         addPlayer.setOnAction(e -> {
             sceneManager.switchScene("AddPlayer");
         });
-        rightVbox.getChildren().add(addPlayer);
+
+        Button removePlayer = new Button("Remove Player");
+        removePlayer.getStyleClass().add("primary");
+        removePlayer.setOnAction(e -> {
+            teamManager.getCurrentTeam().removePlayer((NFLPlayer) roster.getSelectionModel().getSelectedItem());
+            updateRosterList(teamManager.getCurrentTeam());
+        });
+
+
+        actionsHbox.getChildren().addAll(addPlayer, removePlayer);
+        rightVbox.getChildren().add(actionsHbox);
     }
 
 }
